@@ -1,0 +1,95 @@
+---
+params: 
+  genome: '`r params$genome`'
+  dynamictitle: "Report"
+  annot: '`r params$annot`'
+title: "`r params$dynamictitle`"
+output:
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: true
+      smooth_scroll: true
+  theme: united
+df_print: kable
+date: 'Compiled: `r format(Sys.Date(), "%B %d, %Y")`'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+## R Markdown 
+
+This R Markdown aims to provide a brief summary of all diagnostic plots for your RNA-seq experiment. 
+The fastq files are available for download upon request. 
+
+```{bash preProcess.sh, echo=F, eval=FALSE}
+/home/RSCshare/share/SethupathyLab/1029_Sethupathy_FLC_2
+``` 
+
+Users receiving files from RSCshare are advised to delete all files once they have secure copied them to their own respective drives.
+
+<font size="1"> a copy of your data will be securely archived on our end </font>
+
+
+## Multiqc HTML
+The multiqc html summarises the alignment statistics along with the summary of raw counts generated via [STAR](https://academic.oup.com/bioinformatics/article/29/1/15/272537); 
+
+The raw fastq reads were first processed with __trim-galore__ (Barbraham Institute) package to:
+
+
+- Trim for low quality reads;
+- 2 color chemistry bias (next-seq); 
+- Trim for noisy short fragments;
+- Trim for adapter sequence;
+
+```{bash echo=TRUE, eval=FALSE}
+trim_galore --nextseq 20 --gzip --length 50 --paired --fastqc 
+```
+
+
+The filtered reads were then aligned to `r params$genome ` reference genome with `r params$annot` annotations; 
+
+
+
+<font size="1"> * -\-paired only applicable for paired-end data; -\-length 10 for smRNA-seq libraries</font>
+
+## geneBodyCoverage 
+![](./figures/heatMap.png){width=600px} 
+![](./figures/curves.png){width=600px} 
+
+A good library should indicate little to no bias across the entire gene body. 
+
+
+
+## countsDistribution
+
+![](figures/countsBoxplots.png){width=1200px}
+
+Post-normalization, the medians should be consistent across samples and more similar between biological replicates. 
+
+## sampleCluster
+![](figures/cluster.png){width=800px}
+
+An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
+
+## principalComponents
+![](figures/PCA.png){width=1200px}
+
+Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
+
+
+## MA-Plot
+![](figures/MAPlot.png){width=1200px}
+
+The above figure represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high log2(FC) to be displayed on the plot.
+
+## citations
+
+```{r echo=TRUE, eval=T}
+citation("DESeq2")
+citation("SARTools")
+```
+

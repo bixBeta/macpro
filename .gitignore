@@ -1,0 +1,17 @@
+CFG/
+bedtools/
+bin/
+homer/
+mongodb-macos-x86_64-4.2.2/
+nextflow/
+samtools-1.9/
+share/
+subl/
+.DS_Store
+.Rhistory
+*.txt
+*.xlsx
+*.csv
+*.jar
+
+

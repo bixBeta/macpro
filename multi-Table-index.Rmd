@@ -1,0 +1,37 @@
+---
+title: " Loooooppppppyyyy"
+output:
+  html_document:
+    css: style.css
+    toc: true
+    toc_float: 
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true  
+df_print: kable
+---
+***
+# Looping to plot images 
+
+```{r, echo=T}
+x <- list.files("DMR-results/CoverageStatsPlots/",full.names = T)
+```
+
+***
+## Coverage Stat Plots
+```{r echo=F,out.width=c('50%', '50%'), fig.show='hold'}
+knitr::include_graphics(x)
+```
+
+# Diagnostic Plots
+## PCA
+```{r out.width=c('50%', '50%'), fig.show='hold', echo=F}
+knitr::include_graphics("DMR-results/DiagnosticPlots/methylKit.PCA.plot.jpg")
+knitr::include_graphics("DMR-results/DiagnosticPlots/methylKit.PCA2.plot.jpg")
+```
+
+## Clustering 
+```{r out.width=c('50%', '50%'), fig.show='hold', echo=F }
+knitr::include_graphics("DMR-results/DiagnosticPlots/methylKit.ClusterPlot.jpg")
+knitr::include_graphics("DMR-results/DiagnosticPlots/methylKit.SampleCorelationPlot.jpg")
+```
