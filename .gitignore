@@ -13,5 +13,6 @@ subl/
 *.xlsx
 *.csv
 *.jar
+*.gz
 
 
