@@ -1,4 +1,4 @@
-#----------------------------------------------
+#----------------------------------------------------------------------------------------
 # get sample names and sample ids
 
 for i in */
@@ -14,13 +14,13 @@ done
 pwd
 
 
-#----------------------------------------------
-# samples with  multiple run folders
+#----------------------------------------------------------------------------------------
+# samples with  multiple run folders; un-comment this for autodetecting samples
 
-sort .ids | uniq -d > .idoi  
+# sort .ids | uniq -d > .idoi  
 
 
-#----------------------------------------------
+#----------------------------------------------------------------------------------------
 # get fastqs path info 
 
 for i in  */
@@ -35,18 +35,30 @@ pwd
 
 wc -l .idoi
 
+
+#----------------------------------------------------------------------------------------
+# cellranger count
+
 readarray sampleIDs < .idoi
 
 for i in "${sampleIDs[@]}"
 do
 
 	ID=$i
-	echo "SAMPLE_ID = $ID "
+	#echo "SAMPLE_ID = $ID"
+	
 	GREP_PATH=$(grep `echo $i`$ .paths.info | cut -d ":" -f1  | xargs | sed -e 's/ /,/g')
-	echo "FASTQ_PATH = $GREP_PATH" 
+	#echo "FASTQ_PATH = $GREP_PATH" 
 
 	GREP_NAME=$(grep `echo $i`$ .names | xargs | sed -e 's/ /,/g')
-	echo  "SAMPLE_NAME = $GREP_NAME"
+	#echo  "SAMPLE_NAME = $GREP_NAME"
+
+
+	/programs/cellranger-3.0.2/cellranger count --id=$ID \
+  	--transcriptome=/workdir/singleCellData/10x_reference_files/refdata-cellranger-GRCh38-3.0.0/ \
+  	--fastqs=$GREP_PATH \
+  	--sample=$GREP_NAME \
+  	--localcores 20 --localmem 250
 
 
 done
@@ -54,4 +66,4 @@ done
 
 
 
- # rm .idoi .ids .names .paths.info 	
+rm .ids .names .paths.info 	
