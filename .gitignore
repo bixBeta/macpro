@@ -7,6 +7,7 @@ nextflow/
 samtools-1.9/
 share/
 subl/
+figures/
 .DS_Store
 .Rhistory
 *.txt
