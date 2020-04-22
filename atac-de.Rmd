@@ -49,7 +49,7 @@ Users receiving files from RSCshare are advised to delete all files once they ha
 
 <font size="1"> a copy of your data will be securely archived on our end </font>
 
-*** 
+***
 
 ## Methods
 The multiqc html summarises the alignment statistics along with the duplication rates, flagstats and other useful quality control metrics pertaining to all samples. 
@@ -86,11 +86,10 @@ macs2 callpeak -t ${bam} \
         -f BAMPE \
         -n ${name} \
         -g hs \
-        -q 0.05 
+        -q 0.05 \
         --nomodel --shift 37 --ext 73 \
         --keep-dup all
 ```
-
 
 ***
 
