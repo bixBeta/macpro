@@ -125,7 +125,6 @@ writeReport.DESeq2(target=target, counts=counts, out.DESeq2=out.DESeq2, summaryR
 
 ################################################
 
-projectName = "1096-HOM-may-woPG"
 system(paste("mkdir",projectName ))
 system(paste("mv figures *.html *.RData tables", projectName))
 setwd(paste0(projectName, "/tables"))
