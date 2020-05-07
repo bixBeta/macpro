@@ -11,22 +11,10 @@ if (length(args)<=1) {
 
 library(SARTools)
 
-################################################################################
-### R script to compare several conditions with the SARTools and DESeq2 packages
-### Hugo Varet
-### March 20th, 2018
-### designed to be executed with SARTools 1.6.6
-################################################################################
+workDir <- getwd()      								# working directory for the R session
 
-################################################################################
-###                parameters: to be modified by the user                    ###
-################################################################################
-#rm(list=ls())                                        # remove all the objects from the R session
-
-workDir <- getwd()      # working directory for the R session
-
-projectName <- pin                       # name of the project
-author <- "RSC"                                # author of the statistical analysis/report
+projectName <- pin                      				# name of the project
+author <- "RSC"                                			# author of the statistical analysis/report
 
 targetFile <- "targetFile.txt"                           # path to the design/target file
 rawDir <- getwd()                                      # path to the directory containing raw counts files
@@ -136,7 +124,12 @@ writeReport.DESeq2(target=target, counts=counts, out.DESeq2=out.DESeq2, summaryR
 
 
 ################################################
+
+projectName = "1096-HOM-may-woPG"
 system(paste("mkdir",projectName ))
 system(paste("mv figures *.html *.RData tables", projectName))
+setwd(paste0(projectName, "/tables"))
+#system(paste("pwd"))
+system(paste("/Users/fa286/bin/vs2_vs_.sh"))
 
 
