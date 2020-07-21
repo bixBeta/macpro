@@ -16,3 +16,5 @@ figures/
 *.jar
 *.gz
 chromedriver
+HOMER2/
+x/

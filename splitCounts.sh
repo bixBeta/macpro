@@ -19,7 +19,7 @@ else
   do
       NAME="`cut -f${i} $1 | head -1`"
       awk 'NR>1 {print $'$i'}' $1 > .temp
-      paste .records .temp > $NAME.rawCounts.txt
+      paste .records .temp > $NAME.rawCounts
   done
 
 rm .records .temp
