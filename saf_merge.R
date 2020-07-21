@@ -43,4 +43,4 @@ out.name <- strsplit(file.path, "\\.")[[1]][1]
 
 write.csv(merged.results, paste0(out.name,".ANNOTATED.csv"), quote = F, row.names = F)
 merged.results.bed <- merged.results  %>% select("Chr","Start", "End", "Id")
-write.table(merged.results., paste0(out.name,".ANNOTATED.csv"), quote = F, row.names = F)
+write.table(merged.results.bed, paste0(out.name,".homer.motif.input.bed"), quote = F, row.names = F, col.names = F)
