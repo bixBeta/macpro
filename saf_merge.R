@@ -3,13 +3,21 @@
 args <-  commandArgs(trailingOnly = T)
 
 if (length(args)==0) {
-  print(" Usage = Rscript saf_merge.R < safFile , Dir >")
+  print(" Usage = Rscript saf_merge.R < safFile >")
   stop("Missing some files !!! \n", call.=FALSE)
 
 }
 
+library(progress)
+pb <- progress_bar$new(total = 100)
 
-suppressPackageStartupMessages(library("dplyr"))
+for (i in 1:20) {
+  pb$tick()
+  Sys.sleep(1 / 10)
+}
+
+
+suppressWarnings(suppressPackageStartupMessages(library("dplyr")))
 saf.path <- args[1]
 
 
@@ -21,23 +29,33 @@ safFile <- read.table(saf.path, header = T, sep = "\t")
 colnames(safFile)[1] <- "peakID" 
 
 
+
+for (i in 1:30) {
+  pb$tick()
+  Sys.sleep(1 / 100)
+}
+
+
 # Merge Function ----------------------------------------------------------------------------
 
 mergeFunc <- function(s = safFile, c = contrast){
   
+  # combine saf file annotations with the contrast file
   merged.results <<- left_join(contrast, safFile, by = c("Id" = "peakID"))
   merged.results <<- merged.results %>% select("Chr","Start", "End", "Id", everything())
-  
   merged.results$Chr <<- paste0('chr', merged.results$Chr)
   
-  # out.name <<- strsplit(file.path, "\\.")[[1]][1]
-  # 
-  # ### Write the merged annotated output to file
-  # write.csv(merged.results, paste0(out.name,".ANNOTATED.csv"), quote = F, row.names = F)
-  # 
-  # merged.results.bed <<- merged.results  %>% select("Chr","Start", "End", "Id")
-  # ### Write bed file to use with HOMER
-  # write.table(merged.results.bed, paste0(out.name,".homer.motif.input.bed"), quote = F, row.names = F, col.names = F, sep = "\t")
+  # filter out the down regulated regions and prepare bed file
+  down.reg <<- merged.results %>% filter(log2FoldChange < 0, padj < 0.05) 
+  down.reg.bed <<- down.reg %>% select("Chr","Start", "End", "Id")
+  
+  # filter out the up regulated refions and prepare bed file
+  up.reg <<- merged.results%>% filter(log2FoldChange > 0, padj < 0.05)
+  up.reg.bed <<- up.reg %>% select("Chr","Start", "End", "Id")
+  
+  # filter out all regions i.e. padj < 0.05 and prepare bed file
+  complete <<- rbind(down.reg, up.reg)
+  complete.bed <<- complete %>% select("Chr","Start", "End", "Id")
   
 }
 
@@ -46,7 +64,12 @@ mergeFunc <- function(s = safFile, c = contrast){
 
 # Call Functions ---------------------------------------------------------------------------
 
-file.path = list.files(path = args[2], pattern = "_vs_")
+file.path = list.files(path = getwd(), pattern = "_vs_", full.names = T)
+
+for (i in 1:30) {
+  pb$tick()
+  Sys.sleep(1 / 100)
+}
 
 
 for (i in 1:length(file.path)) {
@@ -65,19 +88,33 @@ for (i in 1:length(file.path)) {
   out.name <<- strsplit(file.path[i], "\\.")[[1]][1]
   
   ### Write the merged annotated output to file
-  write.csv(merged.results, paste0(out.name,".ANNOTATED.csv"), quote = F, row.names = F)
+  write.csv(merged.results, paste0(out.name,".RAW.ANNOTATED.csv"), quote = F, row.names = F)
   
-  merged.results.bed <<- merged.results  %>% select("Chr","Start", "End", "Id")
-  ### Write bed file to use with HOMER
-  write.table(merged.results.bed, paste0(out.name,".homer.motif.input.bed"), quote = F, row.names = F, col.names = F, sep = "\t")
+  ### Write complete bed regions to use with HOMER
+  write.table(complete.bed, paste0(out.name,".COMPLETE.homer.bed"), quote = F, row.names = F, col.names = F, sep = "\t")
+  
+  ### Write up reg bed regions to use with HOMER
+  write.table(up.reg.bed, paste0(out.name,".UP.homer.bed"), quote = F, row.names = F, col.names = F, sep = "\t")
+  
+  ### Write down reg bed regions to use with HOMER
+  write.table(down.reg.bed, paste0(out.name,".DOWN.homer.bed"), quote = F, row.names = F, col.names = F, sep = "\t")
   
 }
 
 
+# organize outs
+system("mkdir BEDS ANNOTS")
+system("mv *.bed BEDS")
+system("mv *.RAW.ANNOTATED.csv ANNOTS")
+system("mkdir BEDS/COMPLETE BEDS/UP BEDS/DOWN")
+system("mv BEDS/*.COMPLETE* BEDS/COMPLETE")
+system("mv BEDS/*.UP* BEDS/UP")
+system("mv BEDS/*.DOWN* BEDS/DOWN")
 
-
-
-
+for (i in 1:20) {
+  pb$tick()
+  Sys.sleep(1 / 100)
+}
 
 
 
