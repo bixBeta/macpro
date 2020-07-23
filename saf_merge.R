@@ -3,7 +3,7 @@
 args <-  commandArgs(trailingOnly = T)
 
 if (length(args)==0) {
-  print(" Usage = Rscript saf_merge.R < safFile, sarFile or shinyCSV >")
+  print(" Usage = Rscript saf_merge.R < safFile , Dir >")
   stop("Missing some files !!! \n", call.=FALSE)
 
 }
@@ -11,8 +11,6 @@ if (length(args)==0) {
 
 suppressPackageStartupMessages(library("dplyr"))
 saf.path <- args[1]
-file.path <- args[2]
-
 
 
 # SAF ----------------------------------------------------------------------------------------
@@ -48,7 +46,7 @@ mergeFunc <- function(s = safFile, c = contrast){
 
 # Call Functions ---------------------------------------------------------------------------
 
-file.path = list.files(path = ".", pattern = "_vs_")
+file.path = list.files(path = args[2], pattern = "_vs_")
 
 
 for (i in 1:length(file.path)) {
