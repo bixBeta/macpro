@@ -7,7 +7,7 @@ if (length(args)==0) {
   stop("Missing some files !!! \n", call.=FALSE)
 
 }
-
+cat("\n")
 library(progress)
 pb <- progress_bar$new(total = 100)
 
