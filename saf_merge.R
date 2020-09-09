@@ -29,6 +29,14 @@ safFile <- read.table(saf.path, header = T, sep = "\t")
 colnames(safFile)[1] <- "peakID" 
 
 
+saf.bed <- safFile %>%
+          select(2,3,4,1)
+
+saf.bed$Chr <- paste0('chr', saf.bed$Chr)
+write.table(saf.bed, "HOMER.MOTIF.INPUT.BED", quote = F, row.names = F, col.names = F, sep = "\t")
+
+safFile = select(safFile, !contains(colnames(safFile)[c(6,7,9,14,15,17,18)]))
+
 
 for (i in 1:30) {
   pb$tick()
@@ -88,8 +96,7 @@ for (i in 1:length(file.path)) {
   out.name <<- strsplit(file.path[i], "\\.")[[1]][1]
   
   ### Write the merged annotated output to file
-  write.csv(merged.results, paste0(out.name,".RAW.ANNOTATED.csv"), quote = F, row.names = F)
-  
+  write.table(merged.results, paste0(out.name,".RAW.ANNOTATED.txt"), sep = "\t", quote = F, row.names = F)
   ### Write complete bed regions to use with HOMER
   write.table(complete.bed, paste0(out.name,".COMPLETE.homer.bed"), quote = F, row.names = F, col.names = F, sep = "\t")
   
@@ -104,8 +111,8 @@ for (i in 1:length(file.path)) {
 
 # organize outs
 system("mkdir BEDS ANNOTS")
-system("mv *.bed BEDS")
-system("mv *.RAW.ANNOTATED.csv ANNOTS")
+system("mv *.bed HOMER.MOTIF.INPUT.BED BEDS")
+system("mv *.RAW.ANNOTATED.txt ANNOTS")
 system("mkdir BEDS/COMPLETE BEDS/UP BEDS/DOWN")
 system("mv BEDS/*.COMPLETE* BEDS/COMPLETE")
 system("mv BEDS/*.UP* BEDS/UP")
