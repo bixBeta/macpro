@@ -5,7 +5,7 @@ args <-  commandArgs(trailingOnly = T)
 if (length(args)==0) {
   print(" Usage = Rscript saf_merge.R < safFile >")
   stop("Missing some files !!! \n", call.=FALSE)
-
+  
 }
 cat("\n")
 library(progress)
@@ -30,7 +30,7 @@ colnames(safFile)[1] <- "peakID"
 
 
 saf.bed <- safFile %>%
-          select(2,3,4,1)
+  select(2,3,4,1)
 
 saf.bed$Chr <- paste0('chr', saf.bed$Chr)
 write.table(saf.bed, "HOMER.MOTIF.INPUT.BED", quote = F, row.names = F, col.names = F, sep = "\t")
@@ -93,7 +93,7 @@ for (i in 1:length(file.path)) {
   
   mergeFunc(s = safFile, c = contrast)
   
-  out.name <<- strsplit(file.path[i], "\\.")[[1]][1]
+  out.name <<- strsplit(basename(file.path[i]), "\\.")[[1]][1]
   
   ### Write the merged annotated output to file
   write.table(merged.results, paste0(out.name,".RAW.ANNOTATED.txt"), sep = "\t", quote = F, row.names = F)
