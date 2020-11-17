@@ -74,42 +74,60 @@ The filtered reads were then aligned to `r params$genome ` reference genome with
 <font size="1"> * -\-paired only applicable for paired-end data; -\-length 10 for smRNA-seq libraries</font>
 
 
+
+## countsDistribution
+
+![](figures/countsBoxplots.png){width=1200px}
+
+Post-normalization, the medians should be consistent across samples and more similar between biological replicates. 
+
+
+
+
+## geneBodyCoverage 
+![](figures/heatMap.png){width=600px} 
+![](figures/curves.png){width=600px} 
+
+A good library should indicate little to no bias across the entire gene body. 
+
+
+
+
 ## sampleCluster {.tabset  .tabset-fade .tabset-pills}
-### Clust
+### Clust - All Samples
 ![](figures/cluster.png){width=800px}
 
 An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
 
-### Clust-Heart
-![](figures/cluster-hrt.png){width=800px}
+### Clust - Filtered
+![](figures/cluster-flt.png){width=800px}
 
 An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
 
-### Clust-Lung
-![](figures/cluster-lung.png){width=800px}
-
-An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
 
 ## principalComponents {.tabset  .tabset-fade .tabset-pills}
-### PCA 
+### PCA - All Samples
 ![](figures/PCA.png){width=1200px}
 
 Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
 
-### PCA Heart Samples
-![](figures/PCA-hrt.png){width=1200px}
+### PCA - Filtered
+![](figures/PCA-flt.png){width=1200px}
 
 Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
 
-### PCA Lung Samples
-![](figures/PCA-lung.png){width=1200px}
 
-Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
+## MA-Plots {.tabset  .tabset-fade .tabset-pills}
+### MA - All Samples
+![](figures/MAPlot.png){width=800px}
 
-### PCA Lung Samples w/o Outliers
-![](figures/PCA-lung2.png){width=1200px}
+The above figure represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high log2(FC) to be displayed on the plot.
 
-Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
+
+### MA - Filtered
+![](figures/MAPlot-flt.png){width=800px}
+
+The above figure represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high log2(FC) to be displayed on the plot.
 
 
 
