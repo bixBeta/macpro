@@ -5,7 +5,7 @@ args <-  commandArgs(trailingOnly = T)
 if (length(args)==0) {
   cat("\n")
   cat("________________________________________________________________\n")
-  cat("     Usage = Rscript gsea-merge.R <countMatrix> \n")
+  cat("     Usage = Rscript gsea-merge.R <pin> <countMatrix> \n")
   cat("________________________________________________________________\n")
   cat("\n")
   stop("Missing raw count matrix !!! \n", call.=FALSE)
@@ -21,8 +21,11 @@ for (i in 1:20) {
   pb$tick()
   Sys.sleep(1 / 10)
 }
+
+pin = args[1]
+
 #counts = read.delim("~/Downloads/rawCounts.txt", row.names = 1)
-counts = read.delim(args[1], row.names = 1)
+counts = read.delim(args[2], row.names = 1)
 
 suppressWarnings(suppressPackageStartupMessages(library(tibble)))
 counts = rownames_to_column(counts, "gene")
@@ -91,7 +94,7 @@ shinyInput = left_join(counts, DB.2, by = c("gene" = "SYMBOL"))
 shinyInput = shinyInput[!is.na(shinyInput$NAME),]
 colnames(shinyInput)[which(colnames(shinyInput) == "NAME")] = "pathwayID"
 
-write.table(shinyInput, "merged_gsea_raw_counts.txt", sep = "\t", col.names = T, quote = F, row.names = F)
+write.table(shinyInput, paste0(args[1],".merged_gsea_raw_counts.txt"), sep = "\t", col.names = T, quote = F, row.names = F)
 for (i in 1:40) {
   pb$tick()
   Sys.sleep(1 / 10)
