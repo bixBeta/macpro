@@ -20,11 +20,13 @@ suppressPackageStartupMessages(library(dplyr))
 #config = read.table(file = "config.txt", header = F, sep = "\t")
 
 # read mirdeep2 counts
-counts = read.table(file = arg[1], header = T, comment.char = "", sep=",")
+counts = read.table(file = arg[1], header = T, comment.char = "", sep="\t")
 
 PIN=strsplit(arg[1], split = ".csv")[[1]][1]
 
 newCounts = counts %>% select(!matches(c("read_count", "total", "precursor"))) %>% 
   group_by(X.miRNA) %>% summarise(across(everything(), sum)) %>% column_to_rownames("X.miRNA")
+
+newCounts = newCounts %>% mutate_all(round, 0)
 
 write.table(newCounts, paste0(PIN, "_MERGED.txt"), col.names = NA, row.names = T, quote = F, sep = "\t")
