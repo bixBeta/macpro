@@ -85,9 +85,10 @@ Duplicated and MT mapping reads were removed. The filtered (-Duplicated -MT) bam
 macs2 callpeak -t ${bam} \
         -f BAMPE \
         -n ${name} \
-        -g hs \
+        -g ${genomeSize} \
         -q 0.05 \
         --nomodel --shift 37 --ext 73 \
+        --fe-cutoff 5 \
         --keep-dup all
 ```
 
