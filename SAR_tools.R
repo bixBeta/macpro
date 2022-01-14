@@ -68,7 +68,9 @@ colors<-  c("#EF8A62",
 	     "red",
 	     "magenta3",
 	     "blue",
-	     "yellow"
+	     "lightyellow",
+	     "black",
+	     "lightblue"
 )
 
 #colors <- c(c1,c2)

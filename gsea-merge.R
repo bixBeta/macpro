@@ -94,7 +94,7 @@ shinyInput = left_join(counts, DB.2, by = c("gene" = "SYMBOL"))
 shinyInput = shinyInput[!is.na(shinyInput$NAME),]
 colnames(shinyInput)[which(colnames(shinyInput) == "NAME")] = "pathwayID"
 
-write.table(shinyInput, paste0(args[1],".merged_gsea_raw_counts.txt"), sep = "\t", col.names = T, quote = F, row.names = F)
+write.table(shinyInput, paste0(args[1],".merged_gsea_normalized_counts.txt"), sep = "\t", col.names = T, quote = F, row.names = F)
 for (i in 1:40) {
   pb$tick()
   Sys.sleep(1 / 10)

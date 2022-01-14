@@ -130,3 +130,11 @@ Another way of visualizing the experiment variability is to look at the first pr
 citation("DESeq2")
 citation("SARTools")
 ```
+
+## sample tracking
+```{r echo=F, eval = T, warning=F}
+tf <- read.delim("targetFile.txt")
+
+library(DT)
+datatable(tf)
+```

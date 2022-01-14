@@ -82,11 +82,14 @@ The filtered reads were then aligned to `r params$genome ` reference genome with
 Post-normalization, the medians should be consistent across samples and more similar between biological replicates. 
 
 
+
+
 ## geneBodyCoverage 
 ![](figures/heatMap.png){width=600px} 
 ![](figures/curves.png){width=600px} 
 
 A good library should indicate little to no bias across the entire gene body. 
+
 
 
 
@@ -128,6 +131,9 @@ The above figure represents the MA-plot of the data for the comparisons done, wh
 
 
 
+
+
+
 ## citations
 
 ```{r echo=TRUE, eval=T}
@@ -135,3 +141,10 @@ citation("DESeq2")
 citation("SARTools")
 ```
 
+## sample tracking
+```{r echo=F, eval = T, warning=F}
+tf <- read.delim("targetFile.txt")
+
+library(DT)
+datatable(tf)
+```

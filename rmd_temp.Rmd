@@ -112,3 +112,11 @@ citation("DESeq2")
 citation("SARTools")
 ```
 
+
+## sample tracking
+```{r echo=F, eval = T, warning=F}
+tf <- read.delim("targetFile.txt")
+
+library(DT)
+datatable(tf)
+```

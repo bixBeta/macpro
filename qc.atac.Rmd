@@ -59,3 +59,4 @@ p3 <- list.files("./atacQC.out/", pattern = "narrowPeak.Annotated.png$", full.na
 knitr::include_graphics(p3)
 
 ```
+

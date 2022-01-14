@@ -10,6 +10,7 @@ display_usage(){
   echo " -k3 --knit3 = knit w/o GeneBodyCov"
   echo " -k4 --knit4 = knit for atacQC"
   echo " -k5 --knit5 = custom knit"
+  echo " -k6 --knit6 = knit w/o MA-plot w/o GeneBodyCov"
   echo " -a1 = knit for atac-de (complete)"
   echo " -a2 = knit for atac-de (w/o MA-plot)"
   echo "------------------------------------------------------------------------------------------------------------------"
@@ -69,6 +70,18 @@ knit_html5(){
 
 }
 
+
+knit_html6(){
+
+  scp /Users/fa286/bin/no-gene-body-noMA.Rmd .
+
+  Rscript /Users/fa286/bin/knit.R $T $G $A
+
+  rm no-gene-body-noMA.Rmd
+
+}
+
+
 knit_atac1(){
 
   scp /Users/fa286/bin/atac-de.Rmd .
@@ -115,6 +128,9 @@ case $1 in
       ;;
     -k5|--knit5)
       knit_html5
+      ;;
+    -k6|--knit6)
+      knit_html6
       ;;
     -a1)
       knit_atac1
