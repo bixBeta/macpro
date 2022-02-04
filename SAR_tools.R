@@ -127,14 +127,14 @@ writeReport.DESeq2(target=target, counts=counts, out.DESeq2=out.DESeq2, summaryR
 
 ################################################
 
-system(paste0("/Users/fa286/bin/generateRaw.R ", projectName, " *.RData"))
+system(paste0("/Users/faraz/bin/macpro/generateRaw.R ", projectName, " *.RData"))
 
 system(paste("mkdir",projectName ))
 system(paste("mv figures *.html *.RData tables *.txt", projectName))
 
 setwd(paste0(projectName, "/tables"))
 #system(paste("pwd"))
-system(paste("/Users/fa286/bin/vs2_vs_.sh"))
+system(paste("/Users/faraz/bin/macpro/vs2_vs_.sh"))
 
 #setwd(projectName)
 #system(paste0("/Users/fa286/bin/generateRaw.R ../ ", projectName, " ../*.RData"))

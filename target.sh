@@ -1,4 +1,4 @@
 #!/bin/sh
 
-scp /Users/fa286/bin/targetFile.txt .
+scp /Users/faraz/bin/macpro/targetFile.txt .
 open -a Microsoft\ Excel targetFile.txt

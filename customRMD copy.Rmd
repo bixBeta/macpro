@@ -17,7 +17,7 @@ date: 'Compiled: `r format(Sys.Date(), "%B %d, %Y")`'
 
 
 <div>
-<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/faraz/Documents/trex-extended-logo.png" 
+<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/fa286/Documents/trex-extended-logo.png" 
 style=
 "position:absolute; 
 top:0px; 
@@ -75,18 +75,21 @@ The filtered reads were then aligned to `r params$genome ` reference genome with
 
 
 
-## countDistribution {.tabset  .tabset-fade .tabset-pills}
-### Muscle
+## countsDistribution
 
-![](figures/countsBoxplots-muscle.png){width=1200px}
-
-Post-normalization, the medians should be consistent across samples and more similar between biological replicates. 
-
-### Nerve
-
-![](figures/countsBoxplots-nerve.png){width=1200px}
+![](figures/countsBoxplots.png){width=1200px}
 
 Post-normalization, the medians should be consistent across samples and more similar between biological replicates. 
+
+
+
+
+## geneBodyCoverage 
+![](figures/heatMap.png){width=600px} 
+![](figures/curves.png){width=600px} 
+
+A good library should indicate little to no bias across the entire gene body. 
+
 
 
 
@@ -96,13 +99,8 @@ Post-normalization, the medians should be consistent across samples and more sim
 
 An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
 
-### Clust - Muscle
-![](figures/cluster-muscle.png){width=800px}
-
-An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
-
-### Clust - Nerve
-![](figures/cluster-nerve.png){width=800px}
+### Clust - Filtered
+![](figures/cluster-flt.png){width=800px}
 
 An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
 
@@ -113,15 +111,23 @@ An euclidean distance is computed between samples, and the dendrogram is built u
 
 Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
 
-### PCA - Muscle
-![](figures/PCA-muscle.png){width=1200px}
+### PCA - Filtered
+![](figures/PCA-flt.png){width=1200px}
 
 Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
 
-### PCA - Nerve
-![](figures/PCA-nerve.png){width=1200px}
 
-Another way of visualizing the experiment variability is to look at the first principal components of the PCA. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
+## MA-Plots {.tabset  .tabset-fade .tabset-pills}
+### MA - All Samples
+![](figures/MAPlot.png){width=800px}
+
+The above figure represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high log2(FC) to be displayed on the plot.
+
+
+### MA - Filtered 
+![](figures/MAPlot-flt.png){width=800px}
+
+The above figure represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high log2(FC) to be displayed on the plot.
 
 
 

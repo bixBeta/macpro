@@ -24,6 +24,7 @@ counts = read.table(file = arg[1], header = T, comment.char = "", sep="\t")
 
 PIN=strsplit(arg[1], split = ".csv")[[1]][1]
 
+colnames(counts)[1] = "X.miRNA"
 newCounts = counts %>% select(!matches(c("read_count", "total", "precursor"))) %>% 
   group_by(X.miRNA) %>% summarise(across(everything(), sum)) %>% column_to_rownames("X.miRNA")
 

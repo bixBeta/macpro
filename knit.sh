@@ -11,9 +11,9 @@ if [ "$1" = "help" ] || [  -z $1  ]; then
 
 else
 
-scp /Users/fa286/bin/rmd_temp.Rmd .
+scp /Users/faraz/bin/macpro/rmd_temp.Rmd .
 
-Rscript /Users/fa286/bin/knit.R $1 $2 $3
+Rscript /Users/faraz/bin/macpro/knit.R $1 $2 $3
 
 rm rmd_temp.Rmd
 
