@@ -76,4 +76,4 @@ pComp.df <- pComp.df %>% mutate_at(vars(matches("pca")), ~ ./100000)
 hc2 <- hclust(dist(t(assay(vsd))), method="ward.D")
 
 
-runApp("/Users/fa286/Desktop/app.R", launch.browser = T, port = 80)
+runApp("/Users/faraz/macpro/Desktop/app.R", launch.browser = T, port = 80)

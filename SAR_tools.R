@@ -137,4 +137,4 @@ setwd(paste0(projectName, "/tables"))
 system(paste("/Users/faraz/bin/macpro/vs2_vs_.sh"))
 
 #setwd(projectName)
-#system(paste0("/Users/fa286/bin/generateRaw.R ../ ", projectName, " ../*.RData"))
+#system(paste0("/Users/faraz/macpro/bin/generateRaw.R ../ ", projectName, " ../*.RData"))
