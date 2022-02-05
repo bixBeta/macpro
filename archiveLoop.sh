@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 readarray projects < $1

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 readarray fastqs < B1B2

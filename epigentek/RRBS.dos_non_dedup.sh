@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # RRBS workflow DOS (add ref genome support; add --cutoff 5; add case esac based flow )
 #  Created by Faraz Ahmed on 1/28/19.
