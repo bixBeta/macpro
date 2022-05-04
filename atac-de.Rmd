@@ -1,5 +1,5 @@
 ---
-params: 
+params:
   genome: '`r params$genome`'
   dynamictitle: "Report"
   annot: '`r params$annot`'
@@ -7,23 +7,23 @@ title: "`r params$dynamictitle`"
 output:
   html_document:
     toc: true
-    toc_float: 
+    toc_float:
       collapsed: true
       smooth_scroll: true
-    css: /Users/faraz/bin/macpro/rmd.style.css 
+    css: /Users/faraz/bin/macpro/rmd.style.css
 df_print: kable
 date: 'Compiled: `r format(Sys.Date(), "%B %d, %Y")`'
 ---
 
 <div>
-<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/faraz/Documents/trex-extended-logo.png" 
+<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/faraz/Documents/trex-extended-logo.png"
 style=
-"position:absolute; 
-top:0px; 
+"position:absolute;
+top:0px;
 right:0;
-padding:20px; 
-height:140px; 
-text-align:justify; 
+padding:20px;
+height:140px;
+text-align:justify;
 display:block;
 width:32%;
 height:auto;
@@ -36,10 +36,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-## R Markdown 
+## R Markdown
 
 This report aims to provide a brief summary of methods and data diagnostic plots generated for your experiment. <br>
-The fastq files are available for download upon request. 
+The fastq files are available for download upon request.
 
 ```{bash preProcess.sh, echo=F, eval=FALSE}
 /home/RSCshare/share/SethupathyLab/1029_Sethupathy_FLC_2
@@ -51,33 +51,41 @@ Users receiving files from RSCshare are advised to delete all files once they ha
 
 ***
 
+## sample tracking
+```{r echo=F, eval = T, warning=F}
+tf <- read.delim("targetFile.txt")
+
+library(DT)
+datatable(tf)
+```
+
 ## Methods
-The multiqc html summarises the alignment statistics along with the duplication rates, flagstats and other useful quality control metrics pertaining to all samples. 
-Alignment and qc stats were generated via [bwa-mem](http://bio-bwa.sourceforge.net/bwa.shtml) and [samtools](http://www.htslib.org/doc/samtools.html); 
+The multiqc html (separate file), summarises the alignment statistics along with the duplication rates, flagstats and other useful quality control metrics pertaining to all samples.
+Alignment and qc stats were generated via [bwa-mem](http://bio-bwa.sourceforge.net/bwa.shtml) and [samtools](http://www.htslib.org/doc/samtools.html);
 
 The raw fastq reads were first processed with [trim-galore](https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md) package to:
 
 
 - Trim for low quality reads;
-- 2 color chemistry bias (next-seq); 
+- 2 color chemistry bias (next-seq);
 - Trim for noisy short fragments;
 - Trim for adapter sequence;
 
 ```{bash echo=TRUE, eval=FALSE}
-trim_galore --nextseq 20 --gzip --length 50  -O 1 -a AGATCGGAAGAGC j 1 -e 0.1 --paired --fastqc 
+trim_galore --nextseq 20 --gzip --length 50  -O 1 -a AGATCGGAAGAGC j 1 -e 0.1 --paired --fastqc
 ```
 
-The trimmed reads were then aligned to `r params$genome ` reference genome with `r params$annot` annotations; 
+The trimmed reads were then aligned to `r params$genome ` reference genome with `r params$annot` annotations;
 
 ```{bash echo=TRUE, eval=FALSE}
-bwa mem \ 
+bwa mem \
 -R "@RG\tID:${name}\tSM:${name}\tPL:ILLUMINA\tLB:${name}\tPU:1" \
 ${genome} $i | samtools view -@ 24 -b -h -F 0x0100 -O BAM -o ${name}.bam
 ```
 
 These primary bam files were then marked for duplicates using [picard](https://broadinstitute.github.io/picard/).
 
-Duplicated and MT mapping reads were removed. The filtered (-Duplicated -MT) bams were then used for all downstream analysis. 
+Duplicated and MT mapping reads were removed. The filtered (-Duplicated -MT) bams were then used for all downstream analysis.
 
 [MACS2](https://github.com/taoliu/MACS) was used to call peaks on filtered bam files using the following parameters:
 
@@ -100,7 +108,7 @@ macs2 callpeak -t ${bam} \
 
 ![](figures/countsBoxplots.png){width=1200px}
 
-Post-normalization, the medians should be consistent across samples and more similar between biological replicates. 
+Post-normalization, the medians should be consistent across samples and more similar between biological replicates.
 
 ## sampleCluster
 ![](figures/cluster.png){width=800px}
@@ -133,7 +141,7 @@ Another way of visualizing the experiment variability is to look at the first pr
 
 
 
-</details> --> 
+</details> -->
 
 The above figure represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high log2(FC) to be displayed on the plot.
 
@@ -144,12 +152,4 @@ The above figure represents the MA-plot of the data for the comparisons done, wh
 ```{r echo=TRUE, eval=T}
 citation("DESeq2")
 citation("SARTools")
-```
-
-## sample tracking
-```{r echo=F, eval = T, warning=F}
-tf <- read.delim("targetFile.txt")
-
-library(DT)
-datatable(tf)
 ```

@@ -49,7 +49,7 @@ Users receiving files from RSCshare are advised to delete all files once they ha
 ***
 
 ## Methods
-The multiqc html summarises the alignment statistics along with the duplication rates, flagstats and other useful quality control metrics pertaining to all samples. 
+The multiqc html (separate file), summarises the alignment statistics along with the duplication rates, flagstats and other useful quality control metrics pertaining to all samples. 
 Alignment and qc stats were generated via [bwa-mem](http://bio-bwa.sourceforge.net/bwa.shtml) and [samtools](http://www.htslib.org/doc/samtools.html); 
 
 The raw fastq reads were first processed with [trim-galore](https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md) package to:

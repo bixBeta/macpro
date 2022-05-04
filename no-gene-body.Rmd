@@ -17,7 +17,7 @@ date: 'Compiled: `r format(Sys.Date(), "%B %d, %Y")`'
 
 
 <div>
-<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/faraz/Documents/trex-extended-logo.png" 
+<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/faraz/Documents/trex-extended-logo.png"
 style=
 "position:absolute;
 top:0px;
@@ -53,8 +53,17 @@ Users receiving files from RSCshare are advised to delete all files once they ha
 <font size="1"> a copy of your data will be securely archived on our end </font>
 
 
+## sample tracking
+```{r echo=F, eval = T, warning=F}
+tf <- read.delim("targetFile.txt")
+
+library(DT)
+datatable(tf)
+```
+
+
 ## Multiqc HTML
-The multiqc html summarises the alignment statistics along with the summary of raw counts generated via [STAR](https://academic.oup.com/bioinformatics/article/29/1/15/272537);
+The multiqc html (separate file), summarises the alignment statistics along with the summary of raw counts generated via [STAR](https://academic.oup.com/bioinformatics/article/29/1/15/272537);
 
 The raw fastq reads were first processed with __trim-galore__ (Barbraham Institute) package to:
 
@@ -104,12 +113,4 @@ The above figure represents the MA-plot of the data for the comparisons done, wh
 ```{r echo=TRUE, eval=T}
 citation("DESeq2")
 citation("SARTools")
-```
-
-## sample tracking
-```{r echo=F, eval = T, warning=F}
-tf <- read.delim("targetFile.txt")
-
-library(DT)
-datatable(tf)
 ```
