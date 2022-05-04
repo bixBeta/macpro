@@ -3,7 +3,7 @@
 display_usage(){
   echo "------------------------------------------------------------------------------------------------------------------"
   echo "run the script using the following syntax:"
-  echo "    bash" $0 "<-k1,-k2,k3,k4,-k5,a1 or a2> <Report_Title> <Genome> <Annot>"
+  echo "    bash" $0 "<-k1,-k2,k3,k4,-k5,-a1,-a2 or -i1> <Report_Title> <Genome> <Annot>"
   echo ""
   echo " -k1 --knit1 = knit with all headers (including MA-plot)"
   echo " -k2 --knit2 = knit w/o MA-plot"
@@ -13,6 +13,7 @@ display_usage(){
   echo " -k6 --knit6 = knit w/o MA-plot w/o GeneBodyCov"
   echo " -a1 = knit for atac-de (complete)"
   echo " -a2 = knit for atac-de (w/o MA-plot)"
+  echo " -i1 = knit interactive_complete"
   echo "------------------------------------------------------------------------------------------------------------------"
 }
 
@@ -101,6 +102,16 @@ knit_atac2(){
 }
 
 
+
+knit_interactive(){
+
+  #scp /Users/faraz/bin/macpro/interactive_complete.Rmd .
+
+  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+
+  #rm interactive_complete.Rmd
+}
+
 raise_error() {
   echo "-------------------------------------------------------------------"
   local error_message="$@"
@@ -137,6 +148,9 @@ case $1 in
       ;;
     -a2)
       knit_atac2
+      ;;
+    -i1)
+      knit_interactive
       ;;
      *)
       raise_error "Unknown argument(s): ${1}"
