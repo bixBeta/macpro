@@ -70,7 +70,14 @@ colors<-  c("#EF8A62",
 	     "blue",
 	     "lightyellow",
 	     "black",
-	     "lightblue"
+	     "lightblue",
+	     "#E8AEB7",
+	     "#B8E1FF",
+	     "#A9FFF7",
+	     "#94FBAB",
+	     "#82ABA1",
+	     "#1A181B",
+	     "#564D65"
 )
 
 #colors <- c(c1,c2)
