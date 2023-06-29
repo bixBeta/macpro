@@ -23,9 +23,9 @@ A=$4
 
 knit_html(){
 
-  scp /Users/faraz/bin/macpro/rmd_temp.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/rmd_temp.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm rmd_temp.Rmd
 
@@ -33,9 +33,9 @@ knit_html(){
 
 knit_html2(){
 
-  scp /Users/faraz/bin/macpro/rmd_temp_w_o_MA.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/rmd_temp_w_o_MA.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm rmd_temp_w_o_MA.Rmd
 
@@ -43,9 +43,9 @@ knit_html2(){
 
 knit_html3(){
 
-  scp /Users/faraz/bin/macpro/no-gene-body.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/no-gene-body.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm no-gene-body.Rmd
 
@@ -53,9 +53,9 @@ knit_html3(){
 
 knit_html4(){
 
-  scp /Users/faraz/bin/macpro/qc.atac.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/qc.atac.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.atacQC.R $T
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.atacQC.R $T
 
   rm qc.atac.Rmd
 
@@ -63,9 +63,9 @@ knit_html4(){
 
 knit_html5(){
 
-  scp /Users/faraz/bin/macpro/customRMD.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/customRMD.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm customRMD.Rmd
 
@@ -74,9 +74,9 @@ knit_html5(){
 
 knit_html6(){
 
-  scp /Users/faraz/bin/macpro/no-gene-body-noMA.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/no-gene-body-noMA.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm no-gene-body-noMA.Rmd
 
@@ -85,18 +85,18 @@ knit_html6(){
 
 knit_atac1(){
 
-  scp /Users/faraz/bin/macpro/atac-de.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/atac-de.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm atac-de.Rmd
 }
 
 knit_atac2(){
 
-  scp /Users/faraz/bin/macpro/atac-de-noMA.Rmd .
+  scp /Users/fa286/Documents/GitHub/macpro/atac-de-noMA.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   rm atac-de-noMA.Rmd
 }
@@ -105,9 +105,9 @@ knit_atac2(){
 
 knit_interactive(){
 
-  #scp /Users/faraz/bin/macpro/interactive_complete.Rmd .
+  #scp /Users/fa286/Documents/GitHub/macpro/interactive_complete.Rmd .
 
-  Rscript /Users/faraz/bin/macpro/knit.R $T $G $A
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
 
   #rm interactive_complete.Rmd
 }

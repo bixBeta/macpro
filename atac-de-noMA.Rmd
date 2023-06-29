@@ -16,7 +16,7 @@ date: 'Compiled: `r format(Sys.Date(), "%B %d, %Y")`'
 ---
 
 <div>
-<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/faraz/Documents/trex-extended-logo.png"
+<a href="https://www.rnaseqcore.vet.cornell.edu/" target="_blank" class="trex-logo"> <img src="/Users/fa286/Documents/GitHub/macpro/trex-extended-logo.png"
 style=
 "position:absolute;
 top:0px;
