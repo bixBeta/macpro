@@ -4,10 +4,10 @@ pin <- args[1]
 ref <- args[2]
 
 if (length(args)<=1) {
-  print(" Usage = Rscript test.R <pin> <base-line>")  
+  print(" Usage = Rscript test.R <pin> <base-line>")
   stop("Both arguments must be supplied!!! \n", call.=FALSE)
-  
-} 
+
+}
 
 library(SARTools)
 
@@ -56,12 +56,12 @@ library("viridisLite")
 colors<-  c("#EF8A62",
 	     "#1f78b4",
 	     "#1b9e77",
-	     "purple3", 	      
+	     "purple3",
 	     "khaki4",
 	     "#E9A3C9",
 	     "#A1D76A",
 	     "#FFFF33",
-	     "grey", 
+	     "grey",
 	     "#b3e2cd",
 	     "#67A9CF",
 	     "peachpuff2",
@@ -134,14 +134,14 @@ writeReport.DESeq2(target=target, counts=counts, out.DESeq2=out.DESeq2, summaryR
 
 ################################################
 
-system(paste0("/Users/faraz/bin/macpro/generateRaw.R ", projectName, " *.RData"))
+system(paste0("/Users/fa286/Documents/GitHub/macpro/generateRaw.R ", projectName, " *.RData"))
 
 system(paste("mkdir",projectName ))
 system(paste("mv figures *.html *.RData tables *.txt", projectName))
 
 setwd(paste0(projectName, "/tables"))
 #system(paste("pwd"))
-system(paste("/Users/faraz/bin/macpro/vs2_vs_.sh"))
+system(paste("/Users/fa286/Documents/GitHub/macpro/vs2_vs_.sh"))
 
 #setwd(projectName)
 #system(paste0("/Users/faraz/macpro/bin/generateRaw.R ../ ", projectName, " ../*.RData"))

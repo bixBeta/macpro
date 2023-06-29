@@ -1,4 +1,4 @@
 #!/bin/bash
 
-scp /Users/faraz/bin/macpro/targetFile.txt .
+scp /Users/fa286/Documents/GitHub/macpro/targetFile.txt .
 open -a Microsoft\ Excel targetFile.txt
