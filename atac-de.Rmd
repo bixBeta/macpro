@@ -10,7 +10,7 @@ output:
     toc_float:
       collapsed: true
       smooth_scroll: true
-    css: /Users/faraz/bin/macpro/rmd.style.css
+    css: /Users/fa286/Documents/GitHub/macpro/rmd.style.css
 df_print: kable
 date: 'Compiled: `r format(Sys.Date(), "%B %d, %Y")`'
 ---
