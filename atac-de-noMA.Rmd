@@ -61,9 +61,9 @@ datatable(tf)
 
 ## Methods
 The multiqc html (separate file), summarises the alignment statistics along with the duplication rates, flagstats and other useful quality control metrics pertaining to all samples.
-Alignment and qc stats were generated via [bwa-mem](http://bio-bwa.sourceforge.net/bwa.shtml) and [samtools](http://www.htslib.org/doc/samtools.html);
+Alignment and qc stats were generated via [bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and [samtools](http://www.htslib.org/doc/samtools.html);
 
-The raw fastq reads were first processed with [trim-galore](https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md) package to:
+The raw fastq reads were first processed with [fastp](https://github.com/OpenGene/fastp) package to:
 
 
 - Trim for low quality reads;
@@ -72,15 +72,18 @@ The raw fastq reads were first processed with [trim-galore](https://github.com/F
 - Trim for adapter sequence;
 
 ```{bash echo=TRUE, eval=FALSE}
-trim_galore --nextseq 20 --gzip --length 50  -O 1 -a AGATCGGAAGAGC j 1 -e 0.1 --paired --fastqc
+fastp --length_required 50 --qualified_quality_phred 20 --trim_poly_g ...
 ```
 
 The trimmed reads were then aligned to `r params$genome ` reference genome with `r params$annot` annotations;
 
 ```{bash echo=TRUE, eval=FALSE}
-bwa mem \
--R "@RG\tID:${name}\tSM:${name}\tPL:ILLUMINA\tLB:${name}\tPU:1" \
-${genome} $i | samtools view -@ 24 -b -h -F 0x0100 -O BAM -o ${name}.bam
+    (bowtie2 \
+    --no-unal \
+    -x ${genomeDirBT2[${DIR}]} \
+    -1 $read1 -2 $read2 \
+    --threads 12 \
+    -S - | samtools view -@ 24 -b -h -F 0x0100 -O BAM -o ${prefix}.bam)2>${prefix}.log
 ```
 
 These primary bam files were then marked for duplicates using [picard](https://broadinstitute.github.io/picard/).
