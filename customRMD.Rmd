@@ -93,7 +93,11 @@ Post-normalization, the medians should be consistent across samples and more sim
 
 
 
+## geneBodyCoverage
+![](figures/heatMap.png){width=600px}
+![](figures/curves.png){width=600px}
 
+A good library should indicate little to no bias across the entire gene body.
 
 
 
