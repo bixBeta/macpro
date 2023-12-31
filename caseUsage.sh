@@ -13,6 +13,7 @@ display_usage(){
   echo " -k6 --knit6 = knit w/o MA-plot w/o GeneBodyCov"
   echo " -a1 = knit for atac-de (complete)"
   echo " -a2 = knit for atac-de (w/o MA-plot)"
+  echo " -a3 = knit for atac custom"
   echo " -i1 = knit interactive_complete"
   echo "------------------------------------------------------------------------------------------------------------------"
 }
@@ -101,6 +102,15 @@ knit_atac2(){
   rm atac-de-noMA.Rmd
 }
 
+knit_atac3(){
+
+  scp /Users/fa286/Documents/GitHub/macpro/atac-de-custom.Rmd .
+
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
+
+  rm atac-de-custom.Rmd
+}
+
 
 
 knit_interactive(){
@@ -148,6 +158,9 @@ case $1 in
       ;;
     -a2)
       knit_atac2
+      ;;
+    -a3)
+      knit_atac3
       ;;
     -i1)
       knit_interactive
