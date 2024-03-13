@@ -4,9 +4,9 @@ arg <-  commandArgs(trailingOnly = T)
 
 if (length(arg)==0) {
   cat("\n")
-  print(" Usage = Rscript processMirDeep2.R < mirdeep2 csv output >")
+  print(" Usage = Rscript processGSEA.R < norm counts used for gsea  >")
   cat("\n")
-  stop("Please provide the mirdeep2 csv output file !!! \n", call.=FALSE)
+  stop("Please provide the norm counts used for GSEA !!! \n", call.=FALSE)
   cat("\n")
   cat("\n")
 }
@@ -43,15 +43,15 @@ newCounts = counts %>% select(!matches(c("read_count", "total", "precursor"))) %
   group_by(X.miRNA) %>% summarise(across(everything(), sum)) %>% column_to_rownames("X.miRNA")
 
 newCounts = newCounts %>% mutate_all(round, 0)
-newCounts.raw = newCounts %>% select(-matches("norm"))
+#newCounts.raw = newCounts %>% select(-matches("norm"))
 
-system("mkdir rawCounts")
+#system("mkdir rawCounts")
 
-for (i in 1:ncol(newCounts.raw)) {
-  xsub = newCounts.raw %>% select(all_of(i))
-  write.table(xsub, file = paste0("rawCounts/", colnames(xsub), ".mirDeep2.rawCounts"),
-              col.names = F, sep = "\t", quote = F)
-}
+#for (i in 1:ncol(newCounts.raw)) {
+#  xsub = newCounts.raw %>% select(all_of(i))
+#  write.table(xsub, file = paste0("rawCounts/", colnames(xsub), ".mirDeep2.rawCounts"),
+#              col.names = F, sep = "\t", quote = F)
+#}
 for (i in 1:30) {
   pb$tick()
   Sys.sleep(1 / 100)
