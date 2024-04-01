@@ -56,7 +56,8 @@ Users receiving files from RSCshare are advised to delete all files once they ha
 tf <- read.delim("targetFile.txt")
 
 library(DT)
-datatable(tf)
+datatable(tf, options = list(scrollX = TRUE)) |>
+                  DT::formatStyle(names(tf),lineHeight='100%')
 ```
 
 
