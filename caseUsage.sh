@@ -3,11 +3,11 @@
 display_usage(){
   echo "------------------------------------------------------------------------------------------------------------------"
   echo "run the script using the following syntax:"
-  echo "    bash" $0 "<-k1,-k2,k3,k4,-k5,-a1,-a2 or -i1> <Report_Title> <Genome> <Annot>"
+  echo "    bash" $0 "<-k3> <Report_Title> <Genome> <Annot>"
   echo ""
-  echo " -k1 --knit1 = knit with all headers (including MA-plot)"
+  echo " -k1 or -n1  = knit with all headers (including MA-plot)"
   echo " -k2 --knit2 = knit w/o MA-plot"
-  echo " -k3 --knit3 = knit w/o GeneBodyCov"
+  echo " -k3 or -n3  = knit w/o GeneBodyCov"
   echo " -k4 --knit4 = knit for atacQC"
   echo " -k5 --knit5 = custom knit"
   echo " -k6 --knit6 = knit w/o MA-plot w/o GeneBodyCov"
@@ -122,6 +122,25 @@ knit_interactive(){
   #rm interactive_complete.Rmd
 }
 
+
+knit_nextflow_all(){
+
+  scp /Users/fa286/Documents/GitHub/macpro/nf_rmd_temp.Rmd .
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
+  rm nf_rmd_temp.Rmd
+
+}
+
+
+knit_nextflow_wo_gbcov(){
+
+  scp /Users/fa286/Documents/GitHub/macpro/nf_no-gene-body.Rmd .
+  Rscript /Users/fa286/Documents/GitHub/macpro/knit.R $T $G $A
+  rm nf_no-gene-body.Rmd
+  
+}
+
+
 raise_error() {
   echo "-------------------------------------------------------------------"
   local error_message="$@"
@@ -164,6 +183,12 @@ case $1 in
       ;;
     -i1)
       knit_interactive
+      ;;
+    -n1)
+      knit_nextflow_all
+      ;;
+    -n3)
+      knit_nextflow_wo_gbcov
       ;;
      *)
       raise_error "Unknown argument(s): ${1}"
